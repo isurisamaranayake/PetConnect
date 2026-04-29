@@ -149,8 +149,8 @@
                                         <label for="petSize" class="form-label mt-4">This pet is</label>
                                         <select class="form-select" id="petfor" name="petfor">
                                             <option disabled selected value="">Select</option>
-                                            <option value="Medium">my own pet</option>
-                                            <option value="Small">for adoption</option>
+                                            <option value="my own pet">my own pet</option>
+                                            <option value="for adoption">for adoption</option>
                                         </select>
                                     </div>
                                     </div>
@@ -259,7 +259,7 @@
                         onclick="return false">Confirm</button>
                 </div>
 
-</form>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="backlist();">Back</button>
@@ -656,6 +656,11 @@
                                         text: "Your pet has been transfered.",
                                         icon: "success"
                                     });
+
+                                     $('#modalcont1').hide();
+                                    $('#modalcont2').show();
+
+                                    $('#exampleModal').modal('hide');
 
                                     $('#mypetlist').html("");
 

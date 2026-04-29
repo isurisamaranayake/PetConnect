@@ -17,153 +17,186 @@ include_once('sidebar.php');
 ?>
 
 
-      <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Answer Question</h3></div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Answer Question</li>
-                </ol>
-              </div>
-            </div>
-          </div>
+<!--begin::App Main-->
+<main class="app-main">
+  <!--begin::App Content Header-->
+  <div class="app-content-header">
+    <!--begin::Container-->
+    <div class="container-fluid">
+      <!--begin::Row-->
+      <div class="row">
+        <div class="col-sm-6">
+          <h3 class="mb-0">Answer Question</h3>
         </div>
-        <div class="app-content">
-          <div class="container-fluid">
-           <table class="table table-hover">
-              <thead>
-                  <tr class="table-dark">
-                      <th>Question Date</th>
-                      <th>Priority</th>
-                      <th>Question</th>
-                      <th>Pet Details</th>
-                      <th>Action</th>
-                  </tr>
-              </thead>
-              <tbody id="pettrackers"></tbody>
-          </table>
-            <!--end::Row-->
-            <!--begin::Row-->
-            <div class="row">
-              <!-- Start col -->
-            
-              <!-- /.Start col -->
-            </div>
-            <!-- /.row (main row) -->
-          </div>
-          <!--end::Container-->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Answer Question</li>
+          </ol>
         </div>
-        <!--end::App Content-->
+      </div>
+    </div>
+  </div>
+  <div class="app-content">
+    <div class="container-fluid">
+      <table class="table table-hover">
+        <thead>
+          <tr class="table-dark">
+            <th>Question Date</th>
+            <th>Priority</th>
+            <th>Question</th>
+            <th>Pet Details</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="pettrackers"></tbody>
+      </table>
+      <!--end::Row-->
+      <!--begin::Row-->
+      <div class="row">
+        <!-- Start col -->
+
+        <!-- /.Start col -->
+      </div>
+      <!-- /.row (main row) -->
+    </div>
+    <!--end::Container-->
+  </div>
+  <!--end::App Content-->
 
 
-        <div class="modal fade" id="answerModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
+  <div class="modal fade" id="answerModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-              <div class="modal-header">
-                <h5 class="modal-title">Answer Question</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-              </div>
-
-              <div class="modal-body">
-                <input type="hidden" id="qid">
-
-                <textarea class="form-control" id="answerText"
-                    placeholder="Type your answer..." rows="4"></textarea>
-              </div>
-
-              <div class="modal-footer">
-                <button class="btn btn-primary" id="submitAnswer">Submit</button>
-              </div>
-
-            </div>
-          </div>
+        <div class="modal-header">
+          <h5 class="modal-title">Answer Question</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        
-        <script>
-          $(document).ready(function () {
-              loadQuestions();
 
-              // CLICK ANSWER BUTTON
-$(document).on('click', '.answerBtn', function () {
+        <div class="modal-body">
+          <input type="hidden" id="qid">
 
-    let id = $(this).data('id');
-    let status = $(this).data('status');
+          <textarea class="form-control" id="answerText" placeholder="Type your answer..." rows="4"></textarea>
+        </div>
 
-    if(status !== 'pending'){
-        alert("Already taken or answered!");
-        return;
-    }
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="submitAnswer">Submit</button>
+        </div>
 
-    //  Step 1: Change status to GET
-    $.ajax({
-        url: "../routes/consultation/updateStatus.php",
-        type: "POST",
-        data: { id: id, status: 'get' },
-        success: function () {
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      loadQuestions();
+
+      // CLICK ANSWER BUTTON
+      $(document).on('click', '.answerBtn', function () {
+
+        let id = $(this).data('id');
+        let status = $(this).data('status');
+
+        if (status !== 'pending') {
+          alert("Already taken or answered!");
+          return;
+        }
+
+        //  Step 1: Change status to GET
+        $.ajax({
+          url: "../routes/consultation/updateStatus.php",
+          type: "POST",
+          data: {
+            id: id,
+            status: 'get'
+          },
+          success: function () {
 
             $("#qid").val(id);
             $("#answerModal").modal('show');
 
-        }
-    });
+          }
+        });
 
-});
+      });
 
 
-// SUBMIT ANSWER
-$("#submitAnswer").click(function () {
+      // SUBMIT ANSWER
 
-    let id = $("#qid").val();
-    let answer = $("#answerText").val();
 
-    if(answer == ""){
-        alert("Please enter answer");
-        return;
-    }
+      $("#submitAnswer").click(function () {
 
-    $.ajax({
-        url: "../routes/consultation/submitAnswer.php",
-        type: "POST",
-        data: { id: id, answer: answer },
-        success: function (res) {
+        let id = $("#qid").val();
+        let answer = $("#answerText").val();
 
-            if(res.trim() == "success"){
-                alert("Answered successfully");
-
-                $("#answerModal").modal('hide');
-                $("#answerText").val("");
-
-                loadQuestions(); // reload table
-            }else{
-                alert("Error");
-            }
-        }
-    });
-
-});
+        if (answer == "") {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please enter answer'
           });
+          return;
+        }
 
-          function loadQuestions() {
+        $.ajax({
+          url: "../routes/consultation/submitAnswer.php",
+          type: "POST",
+          data: {
+            id: id,
+            answer: answer
+          },
+          success: function (res) {
 
-              $.ajax({
-                  url: "../routes/consultation/loadQuestions.php",
-                  type: "GET",
-                  success: function (res) {
-                      $("#pettrackers").html(res);
-                  }
+            if (res.trim() == "success") {
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Answered successfully',
+                timer: 1500,
+                showConfirmButton: false
               });
 
+              $("#answerModal").modal('hide');
+              $("#answerText").val("");
+
+              loadQuestions();
+
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Something went wrong!'
+              });
+            }
+          },
+          error: function () {
+            Swal.fire({
+              icon: 'error',
+              title: 'Server Error',
+              text: 'Please try again later'
+            });
           }
-        </script>
-     
-        <?php
+        });
+
+      });
+
+    });
+
+    function loadQuestions() {
+
+      $.ajax({
+        url: "../routes/consultation/loadQuestions.php",
+        type: "GET",
+        success: function (res) {
+          $("#pettrackers").html(res);
+        }
+      });
+
+    }
+  </script>
+
+  <?php
         include_once('footer.php')
         ?>

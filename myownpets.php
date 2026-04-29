@@ -173,8 +173,14 @@
                     </div>
 
                 </form>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Consultation History</h1>
+                <hr>
+            
                 <div class="row">
-
+                    <div class="accordion" id="accordionExample">
+                        
+                        
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -402,6 +408,7 @@
                                         icon: "success"
                                     });
 
+                                    $('#exampleModal1').modal("hide");
 
                                 } else if (res == 'error') {
                                     Swal.fire({
@@ -497,14 +504,14 @@
 
         // load data
         $.ajax({
-            url: "lib/routes/tracking/getTracker.php",
+            url: "lib/routes/consultation/loadconhistory.php",
             type: "POST",
             data: {
                 pet_id: id
             },
 
             success: function (res) {
-                $("#pettrackers").html(res);
+                $("#accordionExample").html(res);
             }
         });
     }

@@ -30,17 +30,19 @@ session_start();
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
     <div class="container-fluid">
         <img src="assets/image/3047928.png" style="width:60px" alt="">
-        <a class="navbar-brand" href="#">Pet Connect</a>
+        <a class="navbar-brand" href="index.php">Pet Connect</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
+
+            <input type="hidden" id="loguserid" value="<?php  if(isset($_SESSION['user_id'])){
+                      echo($_SESSION['user_id']);
+                 } ?>">
                 <li class="nav-item">
-                    <a class="nav-link <?php echo $currentpage =='index.php'? 'active' : ''?>" href="index.php">Home
-                        <span class="visually-hidden">(current)</span>
-                    </a>
+                    
                 </li>
                 <?php
                     if(isset($_SESSION['user_id'])){
@@ -89,6 +91,12 @@ session_start();
 
                     }else{
                                 ?>
+
+                                <li class="nav-item">
+                                <a class="nav-link <?php echo $currentpage =='products.php'? 'active' : ''?>"
+                                    href="products.php">Pet Products</a>
+                            </li>
+
                         <li class="nav-item">
                             <a class="nav-link <?php echo $currentpage =='login.php'? 'active' : ''?>"
                                 href="login.php">Login</a>
@@ -102,9 +110,7 @@ session_start();
                             }
                             ?>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
+              
                 
             </ul>
             <form class="d-flex">

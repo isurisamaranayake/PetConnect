@@ -51,124 +51,20 @@ session_start();
               <i class="bi bi-list"></i>
             </a>
           </li>
-          <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Home</a></li>
-          <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li>
+          <!-- <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Home</a></li>
+          <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li> -->
         </ul>
         <!--end::Start Navbar Links-->
         <!--begin::End Navbar Links-->
         <ul class="navbar-nav ms-auto">
           <!--begin::Navbar Search-->
-          <li class="nav-item">
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-              <i class="bi bi-search"></i>
-            </a>
-          </li>
+         
           <!--end::Navbar Search-->
           <!--begin::Messages Dropdown Menu-->
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-bs-toggle="dropdown" href="#">
-              <i class="bi bi-chat-text"></i>
-              <span class="navbar-badge badge text-bg-danger">3</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-              <a href="#" class="dropdown-item">
-                <!--begin::Message-->
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <img src="./assets/img/user1-128x128.jpg" alt="User Avatar"
-                      class="img-size-50 rounded-circle me-3" />
-                  </div>
-                  <div class="flex-grow-1">
-                    <h3 class="dropdown-item-title">
-                      Brad Diesel
-                      <span class="float-end fs-7 text-danger"><i class="bi bi-star-fill"></i></span>
-                    </h3>
-                    <p class="fs-7">Call me whenever you can...</p>
-                    <p class="fs-7 text-secondary">
-                      <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
-                    </p>
-                  </div>
-                </div>
-                <!--end::Message-->
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <!--begin::Message-->
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <img src="./assets/img/user8-128x128.jpg" alt="User Avatar"
-                      class="img-size-50 rounded-circle me-3" />
-                  </div>
-                  <div class="flex-grow-1">
-                    <h3 class="dropdown-item-title">
-                      John Pierce
-                      <span class="float-end fs-7 text-secondary">
-                        <i class="bi bi-star-fill"></i>
-                      </span>
-                    </h3>
-                    <p class="fs-7">I got your message bro</p>
-                    <p class="fs-7 text-secondary">
-                      <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
-                    </p>
-                  </div>
-                </div>
-                <!--end::Message-->
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <!--begin::Message-->
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <img src="./assets/img/user3-128x128.jpg" alt="User Avatar"
-                      class="img-size-50 rounded-circle me-3" />
-                  </div>
-                  <div class="flex-grow-1">
-                    <h3 class="dropdown-item-title">
-                      Nora Silvester
-                      <span class="float-end fs-7 text-warning">
-                        <i class="bi bi-star-fill"></i>
-                      </span>
-                    </h3>
-                    <p class="fs-7">The subject goes here</p>
-                    <p class="fs-7 text-secondary">
-                      <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
-                    </p>
-                  </div>
-                </div>
-                <!--end::Message-->
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-            </div>
-          </li>
+       
           <!--end::Messages Dropdown Menu-->
           <!--begin::Notifications Dropdown Menu-->
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-bs-toggle="dropdown" href="#">
-              <i class="bi bi-bell-fill"></i>
-              <span class="navbar-badge badge text-bg-warning">15</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-              <span class="dropdown-item dropdown-header">15 Notifications</span>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="bi bi-envelope me-2"></i> 4 new messages
-                <span class="float-end text-secondary fs-7">3 mins</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="bi bi-people-fill me-2"></i> 8 friend requests
-                <span class="float-end text-secondary fs-7">12 hours</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="bi bi-file-earmark-fill me-2"></i> 3 new reports
-                <span class="float-end text-secondary fs-7">2 days</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer"> See All Notifications </a>
-            </div>
-          </li>
+        
           <!--end::Notifications Dropdown Menu-->
           <!--begin::Fullscreen Toggle-->
           <li class="nav-item">
@@ -211,7 +107,7 @@ session_start();
                         }
                       }
                       ?>
-                  <small>Member since Nov. 2023</small>
+                  <small>Welcome To Pet Connect</small>
                 </p>
               </li>
               <!--end::User Image-->
@@ -219,8 +115,8 @@ session_start();
 
               <!--begin::Menu Footer-->
               <li class="user-footer">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                <a href="logout.php" class="btn btn-default btn-flat float-end">Sign out</a>
+                <!-- <a href="#" class="btn btn-default btn-flat">Profile</a> -->
+                <a href="logout.php" class="btn btn-warning btn-flat float-end">Sign out</a>
               </li>
               <!--end::Menu Footer-->
             </ul>
@@ -255,7 +151,16 @@ session_start();
           <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
             aria-label="Main navigation" data-accordion="false" id="navigation">
             <li class="nav-item">
-              <a href="admin.php" class="nav-link">
+              <a href="<?php
+                    if(isset($_SESSION['user_id'])){
+                        $usertype = $_SESSION['user_Type'];
+
+                        if($usertype == 'admin'){
+                            echo('admin.php');
+
+                        }else if($usertype == 'vet'){
+                            echo('vet.php');
+                        }}?>" class="nav-link">
                 <i class="nav-icon bi bi-palette"></i>
                 <p>Dashboard</p>
               </a>
@@ -277,34 +182,39 @@ session_start();
                         if($usertype == 'admin'){
                             echo('<li class="nav-item">
                     <a href="addpet.php" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Add Pet</p>
+                      <i class="nav-icon bi bi-circle text-success"></i>
+                      <p>Manage Pet</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="approvepet.php" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-circle text-danger"></i>
                       <p>Approve Pets</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="addevents.php" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Event Posting</p>
-                    </a>
-                  </li>');
+                  ');
 
                         }else if($usertype == 'vet'){
                             echo('<li class="nav-item">
                     <a href="addpet.php" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-circle text-success"></i>
                       <p>Add Pet</p>
                     </a>
                   </li>
+
+                  <li class="nav-item menu-open">
+              <a href="#" class="nav-link">
+                <i class="nav-icon bi bi-heart"></i>
+                <p>
+                  consultation support
+                  <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
                   
                   <li class="nav-item">
             <a href="answer.php" class="nav-link">
-              <i class="nav-icon bi bi-circle text-danger"></i>
+              <i class="nav-icon bi bi-circle text-warning"></i>
               <p class="text">Answer Question</p>
             </a>
           </li>');
@@ -326,14 +236,31 @@ session_start();
               <a href="#" class="nav-link">
                 <i class="nav-icon bi bi-heart"></i>
                 <p>
+                  Event
+                  <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview"><li class="nav-item">
+                    <a href="addevents.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle text-info"></i>
+                      <p>Event Posting</p>
+                    </a>
+                  </li>
+                  </ul>
+          </li>
+          
+          <li class="nav-item menu-open">
+              <a href="#" class="nav-link">
+                <i class="nav-icon bi bi-heart"></i>
+                <p>
                   Staff
                   <i class="nav-arrow bi bi-chevron-right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview"><li class="nav-item">
                     <a href="addstaff.php" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Add Staff</p>
+                      <i class="nav-icon bi bi-circle text-danger"></i>
+                      <p>Manage Staff</p>
                     </a>
                   </li>
                   </ul>
@@ -362,12 +289,71 @@ session_start();
             </a>
             <ul class="nav nav-treeview"><li class="nav-item">
                     <a href="addproduct.php" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Add Product</p>
+                      <i class="nav-icon bi bi-circle text-warning"></i>
+                      <p>Manage Product</p>
                     </a>
                   </li>
                   </ul>
-          </li>');
+          </li>
+          
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon bi bi-heart"></i>
+              <p>
+                Orders
+                <i class="nav-arrow bi bi-chevron-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview"><li class="nav-item">
+                    <a href="allorders.php" class="nav-link">
+                      <i class="nav-icon bi bi-circle text-success"></i>
+                      <p>Manage Orders</p>
+                    </a>
+                  </li>
+                  </ul>
+          </li>
+          
+          <li class="nav-item menu-open">
+    <a href="#" class="nav-link">
+        <i class="nav-icon bi bi-heart"></i>
+        <p>
+            Reports
+            <i class="nav-arrow bi bi-chevron-right"></i>
+        </p>
+    </a>
+
+    <ul class="nav nav-treeview">
+
+        <li class="nav-item">
+            <a href="#" onclick="openReport(`users`)" class="nav-link">
+                <i class="nav-icon bi bi-circle text-info"></i>
+                <p>All Users</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" onclick="openReport(`pets`)" class="nav-link">
+                <i class="nav-icon bi bi-circle text-success"></i>
+                <p>All Pets</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" onclick="openReport(`orders`)" class="nav-link">
+                <i class="nav-icon bi bi-circle text-warning"></i>
+                <p>All Orders</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" onclick="openReport(`adoption`)" class="nav-link">
+                <i class="nav-icon bi bi-circle text-danger"></i>
+                <p>Adoption Records</p>
+            </a>
+        </li>
+
+    </ul>
+</li>');
 
                         }
 
@@ -379,7 +365,7 @@ session_start();
           </ul>
           </li>
 
-          <li class="nav-header">LABELS</li>
+          <!-- <li class="nav-header">LABELS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon bi bi-circle text-danger"></i>
@@ -398,10 +384,24 @@ session_start();
               <p>Informational</p>
             </a>
           </li>
-          </ul>
+          </ul> -->
           <!--end::Sidebar Menu-->
         </nav>
       </div>
       <!--end::Sidebar Wrapper-->
     </aside>
     <!--end::Sidebar-->
+
+    <script>
+      function openReport(type){
+
+    let url = "report.php?type=" + type;
+
+    window.open(
+        url,
+        "_blank",
+        "width=900,height=700"
+    );
+
+}
+    </script>

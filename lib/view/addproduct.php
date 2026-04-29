@@ -26,12 +26,12 @@ include_once('sidebar.php');
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Add Product</h3>
+                    <h3 class="mb-0">Product Management</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">add product</li>
+                        <li class="breadcrumb-item active" aria-current="page">Product Management</li>
                     </ol>
                 </div>
             </div>
@@ -41,172 +41,209 @@ include_once('sidebar.php');
     </div>
     <!--end::App Content Header-->
     <!--begin::App Content-->
-    <div class="app-content">
-        <!--begin::Container-->
-        <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
+    <div class="container-fluid mt-4">
+    <div class="row">
 
-                <form id="addproductform" autocomplete="off">
-                    <fieldset>
-                        <h1>Add Product</h1>
+        <!-- LEFT SIDE FORM -->
+        <div class="col-md-6">
+            <form id="productForm" enctype="multipart/form-data">
+                <input type="hidden" id="product_id" name="product_id">
 
-                        <div>
-                            <label class="form-label mt-4">Product Name</label>
-                            <input type="text" class="form-control" id="product_name" name="product_name" 
-                                placeholder="Enter product name">
-                        </div>
+                <h4 id="formTitle">Add Product</h4>
 
-                        <div>
-                            <label class="form-label mt-4">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"
-                                placeholder="Enter product description"></textarea>
-                        </div>
+                <div class="mb-2">
+                    <label>Product Name</label>
+                    <input type="text" id="product_name" name="product_name" class="form-control">
+                </div>
 
-                        <div class="row">
-                            <div class="col-6">
-                                <label class="form-label mt-4">Selling Price</label>
-                                <input type="number" step="0.01" class="form-control" id="price" name="price"
-                                    placeholder="Enter selling price">
-                            </div>
+                <div class="mb-2">
+                    <label>Description</label>
+                    <textarea id="description" name="description" class="form-control"></textarea>
+                </div>
 
-                            <div class="col-6">
-                                <label class="form-label mt-4">Cost Price</label>
-                                <input type="number" step="0.01" class="form-control" id="cost_price" name="cost_price"
-                                    placeholder="Enter cost price">
-                            </div>
-                        </div>
+                <div class="mb-2">
+                    <label>Price</label>
+                    <input type="number" id="price" name="price" class="form-control">
+                </div>
 
-                        <div>
-                            <label class="form-label mt-4">Stock Quantity</label>
-                            <input type="number" class="form-control" id="stock_quantity" name="stock_quantity"
-                                placeholder="Enter stock quantity">
-                        </div>
+                <div class="mb-2">
+                    <label>Cost Price</label>
+                    <input type="number" id="cost_price" name="cost_price" class="form-control">
+                </div>
 
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="productimage" class="form-label mt-4">Product Pictures</label>
-                                <input class="form-control" type="file" name="product_image" id="product_image">
-                            </div>
+                <div class="mb-2">
+                    <label>Stock Quantity</label>
+                    <input type="number" id="stock_quantity" name="stock_quantity" class="form-control">
+                </div>
 
-                            <div class="col-6">
-                                <img src="../../assets/image/images.png" alt="" id="productimageprv" style="height:150px;">
-                            </div>
-                        </div>
-                        <div class="py-2">
-                            <button id="addproductbtn" onclick="return false" class="btn btn-success">Add Product</button>
-                        </div>
-                    </fieldset>
-                </form>
+                <div class="mb-2">
+                    <label>Image</label>
+                    <input type="file" id="product_image" name="product_image" class="form-control">
+                </div>
 
-            </div>
-            <!--end::Row-->
-            <!--begin::Row-->
-            <div class="row">
-                <!-- Start col -->
+                <img id="preview" src="../../assets/image/images.png" style="height:120px">
 
-                <!-- /.Start col -->
-            </div>
-            <!-- /.row (main row) -->
+                <div class="mt-3">
+                    <button id="saveBtn" class="btn btn-success">Save</button>
+                    <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
         </div>
-        <!--end::Container-->
+
+        <!-- RIGHT SIDE TABLE -->
+        <div class="col-md-6">
+             <h4 id="formTitle">All Products</h4>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th width="150">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productTable"></tbody>
+            </table>
+        </div>
+
     </div>
+</div>
     <!--end::App Content-->
 </main>
 <!--end::App Main-->
 
 <script>
-    $(document).ready(function () {
+   $(document).ready(function () {
 
-        $("#product_image").change(function () {
+    loadProducts();
 
-            var fileRead = new FileReader();
+    // IMAGE PREVIEW
+    $("#product_image").change(function () {
+        let reader = new FileReader();
+        reader.onload = e => $("#preview").attr("src", e.target.result);
+        reader.readAsDataURL(this.files[0]);
+    });
 
-            fileRead.onload = function (e) {
-                $("#productimageprv").attr("src", e.target.result);
+    // SAVE
+    $("#saveBtn").click(function (e) {
+        e.preventDefault();
 
-            }
+        let isValid = true;
+        $('.form-control').removeClass('is-invalid');
 
-            fileRead.readAsDataURL(this.files[0]);
-
-        })
-
-        $('#addproductbtn').on("click", function () {
-
-            let isValid = true;
-
-            // Clear previous errors
-            $('.form-control, .form-select').removeClass('is-invalid');
-
-            function validateField(id) {
-                let value = $(id).val();
-                if (!value) {
-                    $(id).addClass('is-invalid');
-                    isValid = false;
-                }
-            }
-
-            validateField('#product_name');
-            validateField('#description');
-            validateField('#price');
-            validateField('#cost_price');
-            validateField('#stock_quantity');
-
-            // Image validation
-            if ($('#product_image')[0].files.length === 0) {
-                $('#product_image').addClass('is-invalid');
+        function validate(id){
+            if($(id).val() === ""){
+                $(id).addClass('is-invalid');
                 isValid = false;
             }
-            
-            if (isValid) {
-                alert("Product added Successfully");
+        }
 
-                var form = $("#addproductform")[0];
-                var formData = new FormData(form);
+        validate("#product_name");
+        validate("#price");
+        validate("#stock_quantity");
 
-                $.ajax({
-                    url: "../routes/product/addproduct.php",
-                    type: "post",
-                    data: formData,
-                    processdata: false,
-                    contentType: false,
+        if(!isValid){
+            Swal.fire("Error", "Fill required fields", "warning");
+            return;
+        }
 
-                    success: function (res) {
+        let form = $("#productForm")[0];
+        let formData = new FormData(form);
 
-                        if (res.trim() === 'success') {
-                            $('#addproductform')[0].reset();
-                            Swal.fire({
-                                title: "Successfully Saved",
-                                text: "Product Added Successfully",
-                                icon: "success"
-                            });
+        let id = $("#product_id").val();
+        let url = (id === "") 
+            ? "../routes/product/addproduct.php"
+            : "../routes/product/updateproduct.php";
 
-                        } else if (res === 'error') {
-                            Swal.fire({
-                                title: "Save Error",
-                                text: "Something went wrong",
-                                icon: "Warning"
-                            });
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
 
-                        } else {
-                            Swal.fire({
-                                title: "Save Error",
-                                text: "something went wrong",
-                                icon: "warning"
-                            });
+            success: function (res) {
 
-                        }
-                    },
-                    error: function (res) {}
-                })
+                if (res.trim() === "success") {
 
+                    Swal.fire("Success", "Saved Successfully", "success");
+
+                    $("#productForm")[0].reset();
+                    $("#product_id").val("");
+                    $("#formTitle").text("Add Product");
+                    $("#preview").attr("src","../../assets/image/images.png");
+
+                    loadProducts();
+
+                } else {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
             }
-            else{
-                alert('successfull');
-}
-
         });
     });
+
+    // RESET
+    $("#resetBtn").click(function () {
+        $("#productForm")[0].reset();
+        $("#product_id").val("");
+        $("#formTitle").text("Add Product");
+        $("#preview").attr("src","../../assets/image/images.png");
+    });
+
+});
+
+// LOAD
+function loadProducts(){
+    $.get("../routes/product/loadproduct.php", function(res){
+        $("#productTable").html(res);
+    });
+}
+
+// EDIT
+$(document).on("click", ".editBtn", function () {
+
+    $("#product_id").val($(this).data("id"));
+    $("#product_name").val($(this).data("name"));
+    $("#description").val($(this).data("description"));
+    $("#price").val($(this).data("price"));
+    $("#cost_price").val($(this).data("cost"));
+    $("#stock_quantity").val($(this).data("stock"));
+
+    $("#preview").attr("src","../"+$(this).data("image"));
+
+    $("#formTitle").text("Edit Product");
+
+    // Swal.fire("Edit Mode", "You can now update this product", "info");
+});
+
+// DELETE
+function deleteProduct(id){
+
+    Swal.fire({
+        title: "Delete?",
+        text: "This product will be removed!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        confirmButtonText: "Yes delete"
+    }).then((result)=>{
+        if(result.isConfirmed){
+
+            $.post("../routes/product/deleteproduct.php",{id:id},function(res){
+
+                if(res.trim()=="success"){
+                    Swal.fire("Deleted!", "Product removed", "success");
+                    loadProducts();
+                }else{
+                    Swal.fire("Error", "Delete failed", "error");
+                }
+
+            });
+
+        }
+    });
+}
 </script>
 
 <?php

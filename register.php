@@ -4,59 +4,125 @@
 <head>
     <title>Pet-resgister</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <style>
+    body {
+        background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
+        height: 100vh;
+    }
+
+    .register-card {
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .register-title {
+        text-align: center;
+        font-weight: bold;
+        color: #198754;
+    }
+
+    .form-control, .form-select {
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .btn-success {
+        border-radius: 10px;
+        width: 100%;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-success:hover {
+        transform: scale(1.03);
+        background-color: #157347;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+</style>
 </head>
 
 <body>
     <?php
     include_once('common.php');
     ?>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-6">
+    <div class="container d-flex align-items-center justify-content-center" style="min-height:100vh;">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-5">
+
+            <div class="register-card">
+
                 <form id="regform" autocomplete="off">
                     <fieldset>
-                        <h1>registration</h1>
+
+                        <h2 class="register-title mb-4">
+                            <i class="bi bi-person-plus-fill"></i> Registration
+                        </h2>
+
                         <div>
-                            <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+                            <label class="form-label mt-2">Email address</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                aria-describedby="emailHelp" placeholder="Enter email">
+                                placeholder="Enter email">
                         </div>
+
                         <div>
-                            <label for="exampleInputEmail1" class="form-label mt-4">User Name</label>
-                            <input type="text" class="form-control is-invalid" id="username" name="username" autocomplete="off"
-                                placeholder="Enter name">
+                            <label class="form-label mt-3">User Name</label>
+                            <input type="text" class="form-control is-invalid" id="username" name="username"
+                                autocomplete="off" placeholder="Enter name">
                         </div>
+
                         <div>
-                            <label for="exampleInputEmail1" class="form-label mt-4">Phone Number</label>
+                            <label class="form-label mt-3">Phone Number</label>
                             <input type="text" class="form-control" id="phone" name="phone"
-                                placeholder="Enter phone number ">
+                                placeholder="Enter phone number">
                         </div>
+
                         <div>
-                            <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+                            <label class="form-label mt-3">Password</label>
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Password" autocomplete="off">
                         </div>
+
                         <div>
-                            <label for="exampleInputPassword1" class="form-label mt-4">Password Retype</label>
+                            <label class="form-label mt-3">Password Retype</label>
                             <input type="password" class="form-control" id="passwordretype"
-                                placeholder="RetypePassword" autocomplete="off">
-                        </div> 
+                                placeholder="Retype Password" autocomplete="off">
+                        </div>
+
                         <div>
-                            <label for="exampleSelect1" class="form-label mt-4">User Type</label>
+                            <label class="form-label mt-3">User Type</label>
                             <select class="form-select" id="usertype" name="type">
                                 <option disabled selected value="">Select</option>
                                 <option value="Vet">Vet</option>
-                                <option value="Adopter">Adopter</option>  
+                                <option value="Adopter">Adopter</option>
                             </select>
                         </div>
-                        <div class="py-2">
-                            <button id="regbtn" onclick="return false" class="btn btn-success">Registration</button>
+
+                        <div class="py-3">
+                            <button id="regbtn" onclick="return false" class="btn btn-success">
+                                <i class="bi bi-check-circle"></i> Registration
+                            </button>
                         </div>
+
+                        <div class="text-center">
+                            <small class="text-muted">Join Pet Connect Community</small>
+                        </div>
+
                     </fieldset>
                 </form>
+
             </div>
+
         </div>
     </div>
+</div>
 </body>
 
 

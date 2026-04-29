@@ -171,6 +171,12 @@ include_once('sidebar.php');
                                         <img src="../../assets/image/images.png" alt="" id="petimageprv"
                                             style="height:150px;">
                                     </div>
+                                    <div class="col-6" style="display: none;">
+                                     <label for="petSize" class="form-label mt-4">Pet For</label>
+                                        <select class="form-select" id="petfor" name="petfor">
+                                            <option selected value="for Adoption">for Adoption</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="py-2">
                                     <button id="addpetbtn" onclick="return false" class="btn btn-success">Add
@@ -230,7 +236,7 @@ include_once('sidebar.php');
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" id="modalcont1">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Interested List</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -246,15 +252,49 @@ include_once('sidebar.php');
                         </tr>
                     </thead>
                     <tbody id="interestpersonlist">
-                    </tbody >
+                    </tbody>
                 </table>
             </div>
             <div class="modal-footer">
                 <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
             </div>
         </div>
+        <div class="modal-content" id="modalcont2" style="display:none">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Transfer Form</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="" id="transferform">
+
+                <label for="petColor" class="form-label mt-4">Transfer Notes</label>
+
+                <textarea class="form-control" name="transfernotes" id="transfernotes" placeholder="Pet Health / Pet Charactericstics / Food Preferences" rows="3"></textarea>
+
+                <input type="hidden" name="interestid" id="interestid">
+                <input type="hidden" name="ipetid" id="ipetid">
+                <input type="hidden" name="icby" id="icby">
+
+
+                <label for="petColor" class="form-label mt-4">Attach Document</label>
+                <input class="form-control" type="file" name="documents" id="documents">
+
+                <div class="text-end mt-3">
+                    <button type="button" class="btn btn-success" id="transferconfirm"
+                        onclick="return false">Confirm</button>
+                </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="backlist();">Back</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <script>
     $(document).ready(function () {
@@ -594,6 +634,89 @@ include_once('sidebar.php');
 
         });
 
+         $('#transferconfirm').on("click", function () {
+
+            var valid = true;
+
+            function validateField(id) {
+                let value = $(id).val();
+                if (!value) {
+                    $(id).addClass('is-invalid');
+                    isValid = false;
+                }
+            }
+
+            validateField('#transfernotes');
+
+            if (valid) {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, Transfer Pet!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        var form = $("#transferform")[0];
+                        var formData = new FormData(form);
+
+                        $.ajax({
+                            url: "../routes/adoption/transferpet.php",
+                            type: "post",
+                            data: formData,
+                            processdata: false,
+                            contentType: false,
+
+                            success: function (res) {
+
+                                if (res.trim() === 'success') {
+                                    $('#transferform')[0].reset();
+
+                                    Swal.fire({
+                                        title: "Transfered!",
+                                        text: "Your pet has been transfered.",
+                                        icon: "success"
+                                    });
+
+                                     $('#modalcont1').hide();
+                                    $('#modalcont2').show();
+
+                                    $('#exampleModal').modal('hide');
+
+                                    $('#mypetlist').html("");
+
+                                    $.get("../routes/pet/mypetlist.php", function (
+                                        res) {
+                                        $('#mypetlist').html(res);
+                                    })
+
+                                } else if (res === 'error') {
+                                    Swal.fire({
+                                        title: "Transfer Error",
+                                        text: "Something went wrong",
+                                        icon: "Warning"
+                                    });
+
+                                } else {
+                                    Swal.fire({
+                                        title: "Transfer Error",
+                                        text: "something went wrong",
+                                        icon: "warning"
+                                    });
+
+                                }
+                            },
+                            error: function (res) {}
+                        })
+                    }
+                });
+            }
+        })
+
+
 
     });
 
@@ -647,6 +770,17 @@ include_once('sidebar.php');
                 })
 
         })
+    }
+
+    function transfer($xxx, $yyy, $zzz) {
+        $('#modalcont1').hide();
+        $('#modalcont2').show();
+
+        $('#interestid').val($xxx);
+        $('#ipetid').val($yyy);
+        $('#icby').val($zzz);
+
+
     }
 </script>
 

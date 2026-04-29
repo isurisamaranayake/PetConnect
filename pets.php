@@ -303,7 +303,7 @@
 
         })
 
-            $('#filterbtn').on("click", function () {
+        $('#filterbutton').on("click", function () {
 
                 let category = $('#pettype').val() || "--";
                 let pet_age = $('#petAge').val() || "--";
