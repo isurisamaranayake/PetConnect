@@ -1,3 +1,20 @@
+<?php
+//session start
+session_start();
+
+if(isset($_SESSION['user_id'])){
+    $usertype = $_SESSION['user_Type'];
+
+    if($usertype != 'adopter'){
+        header('location:login.php');    
+    }
+
+}else{
+    header('location:login.php');
+};
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -342,6 +359,9 @@
             $('#addpetbtn').show();
             $('#petid').val("");
 
+            $('#addpetform')[0].reset();
+            $("#petimageprv").attr("src", "assets/image/images.png");
+
         })
 
         $("#petimage").change(function () {
@@ -369,7 +389,8 @@
                 "Doberman",
                 "Dachshund",
                 "Street / stray dog",
-                "Siberian Husky"
+                "Siberian Husky",
+                "Other"
             ],
             "Cat": [
                 "Persian",
@@ -392,7 +413,8 @@
                 "Macaw",
                 "Finch",
                 "African Grey",
-                "Cockatoo"
+                "Cockatoo",
+                "Other"
             ],
             "Fish": [
                 "Goldfish",
@@ -403,7 +425,8 @@
                 "Platy",
                 "Oscar",
                 "Discus",
-                "Neon Tetra"
+                "Neon Tetra",
+                "Other"
             ],
             "Rabbit": [
                 "Holland Lop",
@@ -411,7 +434,8 @@
                 "Netherland Dwarf",
                 "Lionhead",
                 "Flemish Giant",
-                "English Lop"
+                "English Lop",
+                "Other"
             ],
         };
 

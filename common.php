@@ -1,6 +1,8 @@
 <?php
 $currentpage = basename($_SERVER["PHP_SELF"]);
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <script src="js/jquery.js"></script>

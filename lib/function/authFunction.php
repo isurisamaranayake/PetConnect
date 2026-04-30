@@ -109,7 +109,7 @@ class Auth extends Main{
                                 return json_encode([
                                     'status'=>True,
                                     'message'=>'Login Successfully!',
-                                    'path'=>'index.php'
+                                    'path'=>'pets.php'
                     ]);
                         }                
                     }else{

@@ -28,40 +28,40 @@
         }
 
         #floatingCart {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background-color: #0d6efd;
-    color: #fff;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    z-index: 999;
-    transition: all 0.3s ease;
-}
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #0d6efd;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
 
-#floatingCart:hover {
-    transform: scale(1.1);
-    background-color: #0b5ed7;
-}
+        #floatingCart:hover {
+            transform: scale(1.1);
+            background-color: #0b5ed7;
+        }
 
-/* Cart count badge */
-#cartCount {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: red;
-    color: white;
-    font-size: 12px;
-    padding: 3px 6px;
-    border-radius: 50%;
-}
+        /* Cart count badge */
+        #cartCount {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            padding: 3px 6px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -70,10 +70,22 @@
     include_once('common.php');
     ?>
     <div class="d-flex justify-content-end my-1 mx-1">
-    <button class="btn btn-primary" onclick="openOrderModal()">
-        <i class="bi bi-bag"></i> My Order History
-    </button>
-</div>
+
+        <?php
+                    if(isset($_SESSION['user_id'])){
+                        $usertype = $_SESSION['user_Type'];
+
+                        if($usertype == 'adopter'){
+                        echo('<button class="btn btn-primary" onclick="openOrderModal()">
+            <i class="bi bi-bag"></i> My Order History
+        </button>');
+                    }
+
+                    }
+                    
+                    ?>
+        
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div id="productview" class="row mt-3">
@@ -83,108 +95,109 @@
     </div>
 
     <div id="floatingCart" onclick="openCart()">
-    <i class="bi bi-cart-fill"></i>
-    <span id="cartCount">0</span>
-</div>
-
-<div class="modal fade" id="cartModal" tabindex="-1">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title">Your Cart</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-        <div class="row">
-
-          <!-- LEFT SIDE (Products) -->
-          <div class="col-md-8">
-            <div id="cartItems"></div>
-          </div>
-
-          <!-- RIGHT SIDE (Summary) -->
-          <div class="col-md-4 border-start">
-            <h5>Total</h5>
-            <h3 id="cartTotal">LKR. 0.00</h3>
-
-            <hr>
-
-            <h6>Payment Method</h6>
-            <div>
-            <input type="radio" name="payment" value="bank" checked> Bank Transfer<br>
-            <input type="radio" name="payment" value="cod"> Cash on Delivery
-            </div>
-
-            <!-- BANK DETAILS (hidden/visible based on selection) -->
-            <div id="bankDetails" class="mt-3 p-2 border rounded bg-light">
-                <h6>Bank Details</h6>
-                <p class="mb-1"><strong>Bank:</strong> ABC Bank</p>
-                <p class="mb-1"><strong>Account Name:</strong> Pet Connect Store</p>
-                <p class="mb-1"><strong>Account No:</strong> 1234567890</p>
-                <p class="mb-0"><strong>Branch:</strong> Colombo</p>
-            </div>
-            <hr>
-
-            <h6>Delivery Information</h6>
-
-            <input type="text" id="custName" class="form-control mb-2" placeholder="Full Name">
-
-            <input type="text" id="custPhone" class="form-control mb-2" placeholder="Phone Number">
-
-            <textarea id="custAddress" class="form-control mb-2" placeholder="Delivery Address"></textarea>
-
-            <select id="district" class="form-control mb-2">
-                <option value="">Select District</option>
-                <option>Colombo</option>
-                <option>Gampaha</option>
-                <option>Kalutara</option>
-            </select>
-
-            <button class="btn btn-success mt-3 w-100" id="chechoutbtn">
-              Checkout
-            </button>
-          </div>
-
-        </div>
-      </div>
-
+        <i class="bi bi-cart-fill"></i>
+        <span id="cartCount">0</span>
     </div>
-  </div>
-</div>
 
-<div class="modal fade" id="orderModal">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
 
-            <div class="modal-header">
-                <h5>My Orders</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title">Your Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+
+                        <!-- LEFT SIDE (Products) -->
+                        <div class="col-md-8">
+                            <div id="cartItems"></div>
+                        </div>
+
+                        <!-- RIGHT SIDE (Summary) -->
+                        <div class="col-md-4 border-start">
+                            <h5>Total</h5>
+                            <h3 id="cartTotal">LKR. 0.00</h3>
+
+                            <hr>
+
+                            <h6>Payment Method</h6>
+                            <div>
+                                <input type="radio" name="payment" value="bank" checked> Bank Transfer<br>
+                                <input type="radio" name="payment" value="cod"> Cash on Delivery
+                            </div>
+
+                            <!-- BANK DETAILS (hidden/visible based on selection) -->
+                            <div id="bankDetails" class="mt-3 p-2 border rounded bg-light">
+                                <h6>Bank Details</h6>
+                                <p class="mb-1"><strong>Bank:</strong> ABC Bank</p>
+                                <p class="mb-1"><strong>Account Name:</strong> Pet Connect Store</p>
+                                <p class="mb-1"><strong>Account No:</strong> 1234567890</p>
+                                <p class="mb-0"><strong>Branch:</strong> Colombo</p>
+                            </div>
+                            <hr>
+
+                            <h6>Delivery Information</h6>
+
+                            <input type="text" id="custName" class="form-control mb-2" placeholder="Full Name">
+
+                            <input type="text" id="custPhone" class="form-control mb-2" placeholder="Phone Number">
+
+                            <textarea id="custAddress" class="form-control mb-2"
+                                placeholder="Delivery Address"></textarea>
+
+                            <select id="district" class="form-control mb-2">
+                                <option value="">Select District</option>
+                                <option>Colombo</option>
+                                <option>Gampaha</option>
+                                <option>Kalutara</option>
+                            </select>
+
+                            <button class="btn btn-success mt-3 w-100" id="chechoutbtn">
+                                Checkout
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-
-            <div class="modal-body">
-                <div id="orderList"></div>
-            </div>
-
         </div>
     </div>
-</div>
+
+    <div class="modal fade" id="orderModal">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5>My Orders</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="orderList"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </body>
 
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         $.get("lib/routes/product/loadallproducts.php", function (res) {
-                $('#productview').html(res);
+            $('#productview').html(res);
 
         })
 
         loadcount();
 
-         // run on page load (default checked = bank)
+        // run on page load (default checked = bank)
         toggleBankDetails();
 
         // listen to change
@@ -199,7 +212,7 @@
                 return;
             }
 
-             // 🔹 Get cart
+            // 🔹 Get cart
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             // ✅ 1. Cart empty check
@@ -267,10 +280,10 @@
             placeOrder();
         });
 
-        
+
     })
 
-    function openOrderModal(){
+    function openOrderModal() {
 
         console.log("clicked"); // debug
 
@@ -282,25 +295,25 @@
         $("#orderList").html("<div class='text-center'>Loading...</div>");
 
         // 3️⃣ Load data
-        $.get("lib/routes/order/loadMyOrders.php", function(res){
+        $.get("lib/routes/order/loadMyOrders.php", function (res) {
 
             console.log(res); // debug response
 
             $("#orderList").html(res);
 
-        }).fail(function(){
+        }).fail(function () {
             $("#orderList").html("<div class='text-danger'>Failed to load orders</div>");
         });
 
     }
 
     // UPLOAD PAYMENT SLIP
-    function uploadSlip(orderId){
+    function uploadSlip(orderId) {
 
-        let file = $("#slip_"+orderId)[0].files[0];
+        let file = $("#slip_" + orderId)[0].files[0];
 
-        if(!file){
-            Swal.fire("Error","Please select file","warning");
+        if (!file) {
+            Swal.fire("Error", "Please select file", "warning");
             return;
         }
 
@@ -315,12 +328,12 @@
             processData: false,
             contentType: false,
 
-            success: function(res){
-                if(res.trim()=="success"){
-                    Swal.fire("Success","Slip uploaded","success");
+            success: function (res) {
+                if (res.trim() == "success") {
+                    Swal.fire("Success", "Slip uploaded", "success");
                     loadOrders();
-                }else{
-                    Swal.fire("Error","Upload failed","error");
+                } else {
+                    Swal.fire("Error", "Upload failed", "error");
                 }
             }
         });
@@ -343,7 +356,9 @@
         $.ajax({
             url: "lib/routes/order/makeorder.php",
             type: "POST",
-            data: { order: JSON.stringify(data) },
+            data: {
+                order: JSON.stringify(data)
+            },
 
             success: function (res) {
                 let response = JSON.parse(res);
@@ -412,7 +427,7 @@
 
             total += cart[i].productprice * cart[i].productcount;
 
-           html += `
+            html += `
                 <div class="row align-items-center border p-2 mb-2">
 
                     <!-- IMAGE -->
@@ -450,65 +465,66 @@
         $('#cartTotal').text("LKR. " + total.toFixed(2));
     }
 
-    function addcart(id, name, price, image){
-        var item = {productid:id,
-            productname:name,
-            productprice:price,
-            productimage:image,
-            productcount:1,
+    function addcart(id, name, price, image) {
+        var item = {
+            productid: id,
+            productname: name,
+            productprice: price,
+            productimage: image,
+            productcount: 1,
         }
-        if(localStorage.getItem('cart') === null){
-            var cart=[];
+        if (localStorage.getItem('cart') === null) {
+            var cart = [];
 
             cart.push(item);
 
             localStorage.setItem('cart', JSON.stringify(cart));
 
             Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Product Added to cart",
-                        showConfirmButton: false,
-                        timer: 1000
-                });
-        }else{
+                position: "top-end",
+                icon: "success",
+                title: "Product Added to cart",
+                showConfirmButton: false,
+                timer: 1000
+            });
+        } else {
             var cart = JSON.parse(localStorage.getItem('cart'));
 
-            let exsist =false;
+            let exsist = false;
 
-            for(var i = 0; i < cart.length; i++){
+            for (var i = 0; i < cart.length; i++) {
                 var productid_cart = cart[i].productid;
 
-                if(productid_cart == item.productid){
-                       exsist = true;
+                if (productid_cart == item.productid) {
+                    exsist = true;
                 }
             }
 
-            if(exsist){
-                 Swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: "Product alredy added to cart",
-                        showConfirmButton: false,
-                        timer: 1000
+            if (exsist) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Product alredy added to cart",
+                    showConfirmButton: false,
+                    timer: 1000
                 });
-            }else{
+            } else {
                 cart.push(item);
 
                 localStorage.setItem('cart', JSON.stringify(cart));
 
                 Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Product Added to cart",
-                        showConfirmButton: false,
-                        timer: 1000
+                    position: "top-end",
+                    icon: "success",
+                    title: "Product Added to cart",
+                    showConfirmButton: false,
+                    timer: 1000
                 });
             }
         }
 
         loadcount();
-       
+
     }
 
     function changeQty(index, change) {
@@ -534,16 +550,15 @@
         loadCart();
     }
 
-    function loadcount(){
+    function loadcount() {
         var cart = JSON.parse(localStorage.getItem('cart'));
 
-        if(cart.length > 0){
+        if (cart.length > 0) {
             $('#cartCount').html(cart.length);
-        }else{
+        } else {
             $('#cartCount').html("0");
         }
     }
-   
 </script>
 
 </html>

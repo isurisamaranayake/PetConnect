@@ -1,3 +1,19 @@
+<?php
+//session start
+session_start();
+
+if(isset($_SESSION['user_id'])){
+    $usertype = $_SESSION['user_Type'];
+
+    if($usertype != 'adopter'){
+        header('location:login.php');    
+    }
+
+}else{
+    header('location:login.php');
+};
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -240,7 +256,8 @@
                 "Doberman",
                 "Dachshund",
                 "Street / stray dog",
-                "Siberian Husky"
+                "Siberian Husky",
+                "Other"
             ],
             "Cat": [
                 "Persian",
@@ -252,7 +269,8 @@
                 "Sphynx",
                 "Street / stray cat",
                 "Abyssinian",
-                "Russian Blue"
+                "Russian Blue",
+                "Other"
             ],
             "Bird": [
                 "Parrot",
@@ -263,7 +281,8 @@
                 "Macaw",
                 "Finch",
                 "African Grey",
-                "Cockatoo"
+                "Cockatoo",
+                "Other"
             ],
             "Fish": [
                 "Goldfish",
@@ -274,7 +293,8 @@
                 "Platy",
                 "Oscar",
                 "Discus",
-                "Neon Tetra"
+                "Neon Tetra",
+                "Other"
             ],
             "Rabbit": [
                 "Holland Lop",
@@ -282,7 +302,8 @@
                 "Netherland Dwarf",
                 "Lionhead",
                 "Flemish Giant",
-                "English Lop"
+                "English Lop",
+                "Other"
             ],
         };
 

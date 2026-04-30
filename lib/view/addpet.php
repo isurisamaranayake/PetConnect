@@ -367,6 +367,9 @@ include_once('sidebar.php');
             $('#addpetbtn').show();
             $('#petid').val("");
 
+            $('#addpetform')[0].reset();
+            $("#petimageprv").attr("src", "assets/image/images.png");
+
         })
 
         $("#petimage").change(function () {
@@ -394,7 +397,8 @@ include_once('sidebar.php');
                 "Doberman",
                 "Dachshund",
                 "Street / stray dog",
-                "Siberian Husky"
+                "Siberian Husky",
+                "Other"
             ],
             "Cat": [
                 "Persian",
@@ -406,7 +410,8 @@ include_once('sidebar.php');
                 "Sphynx",
                 "Street / stray cat",
                 "Abyssinian",
-                "Russian Blue"
+                "Russian Blue",
+                "Other"
             ],
             "Bird": [
                 "Parrot",
@@ -417,7 +422,8 @@ include_once('sidebar.php');
                 "Macaw",
                 "Finch",
                 "African Grey",
-                "Cockatoo"
+                "Cockatoo",
+                "Other"
             ],
             "Fish": [
                 "Goldfish",
@@ -428,7 +434,8 @@ include_once('sidebar.php');
                 "Platy",
                 "Oscar",
                 "Discus",
-                "Neon Tetra"
+                "Neon Tetra",
+                "Other"
             ],
             "Rabbit": [
                 "Holland Lop",
@@ -436,7 +443,8 @@ include_once('sidebar.php');
                 "Netherland Dwarf",
                 "Lionhead",
                 "Flemish Giant",
-                "English Lop"
+                "English Lop",
+                "Other"
             ],
         };
 

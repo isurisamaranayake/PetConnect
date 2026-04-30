@@ -69,7 +69,6 @@ class Adoption extends Main{
 
     public function transferpet($interestid, $ipetid, $icby, $transfernotes,  $imageName="", $imageType="", $imageLocation=""){
 
-
         //get on cBy to variable
         $getquery = "SELECT cBy FROM pet_tbl WHERE pet_id = '$ipetid';";
 
@@ -83,8 +82,6 @@ class Adoption extends Main{
             $row = $getresult->fetch_assoc();
             $oldCby = $row['cBy'];
         }
-
-
         //update pet tbl cby column to new interest user id 
         $updatequery = "UPDATE pet_tbl SET cBy = '$icby', status='adopted' WHERE pet_id = '$ipetid';";
 
@@ -96,8 +93,6 @@ class Adoption extends Main{
             $sqlresult = $this->dbResult->query($updatequery);
 
             if($sqlresult > 0){
-
-
             //when its done delete all interest records for that pet
             $deletequery = "DELETE FROM interest_tbl WHERE i_pet_id = '$ipetid';";
 
@@ -105,7 +100,6 @@ class Adoption extends Main{
                         echo($this->dbResult->error);
                         exit;
                     }
-
             $sqlresult2 = $this->dbResult->query($deletequery);
 
             if($sqlresult2 > 0){
@@ -120,12 +114,9 @@ class Adoption extends Main{
 
                 $imageObject = new ImageUpload;
                 $imageurl = $imageObject->imgUpload($imageName, $imageType, 'documents', $imageLocation, $newid);
-
-
             }else{
                 $imageurl ="";
             }
-
             //add transfer data to transfer_tbl
             $insertquery = "INSERT INTO transfer_tbl (t_pet_id, pet_from, pet_to, transfer_note, document)
             VALUE ('$ipetid', '$oldCby', '$icby','$transfernotes', '$imageurl');";
@@ -134,7 +125,6 @@ class Adoption extends Main{
                 echo($this->dbResult->error);
                 exit;
             }
-
             $sqlresult =$this->dbResult->query($insertquery);
             
             if($sqlresult > 0){
@@ -149,9 +139,6 @@ class Adoption extends Main{
                 }else{
                     return("error");
              }
-
-    }
-    
-
+        }
     }
 ?>

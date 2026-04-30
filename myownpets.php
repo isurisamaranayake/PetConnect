@@ -1,3 +1,19 @@
+<?php
+//session start
+session_start();
+
+if(isset($_SESSION['user_id'])){
+    $usertype = $_SESSION['user_Type'];
+
+    if($usertype != 'adopter'){
+        header('location:login.php');    
+    }
+
+}else{
+    header('location:login.php');
+};
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
